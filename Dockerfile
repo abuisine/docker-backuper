@@ -15,4 +15,4 @@ RUN chmod +x /usr/local/bin/*.sh && pip install boto
 
 VOLUME ["/data/redis", "/restore/redis", "/restore/mariadb"]
 
-ENV PASSPHRASE="" PASSPHRASE="" AWS_REGION="" AWS_BUCKET="" AWS_ACCESS_KEY_ID="" AWS_SECRET_ACCESS_KEY=""
+ENV PASSPHRASE="" AWS_REGION="" AWS_BUCKET="" AWS_ACCESS_KEY_ID="" AWS_SECRET_ACCESS_KEY=""
