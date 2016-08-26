@@ -15,9 +15,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
 COPY resources/*.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/*.sh && pip install boto
 
-ADD http://ppa.launchpad.net/duplicity-team/ppa/ubuntu/pool/main/d/duplicity/duplicity_0.7.09-0ubuntu0ppa1231~ubuntu16.04.1_amd64.deb .
+ENV DUPLICITY_VERSION="0.7.10" DUPLICITY_PPA_VERSION="0ubuntu0ppa1240"
 
-RUN dpkg -i duplicity_0.7.09-0ubuntu0ppa1231~ubuntu16.04.1_amd64.deb
+ADD http://ppa.launchpad.net/duplicity-team/ppa/ubuntu/pool/main/d/duplicity/duplicity_${DUPLICITY_VERSION}-${DUPLICITY_PPA_VERSION}~ubuntu16.04.1_amd64.deb .
+
+RUN dpkg -i duplicity_${DUPLICITY_VERSION}-${DUPLICITY_PPA_VERSION}~ubuntu16.04.1_amd64.deb
 
 VOLUME ["/data/redis", "/restore/redis", "/restore/mariadb"]
 
