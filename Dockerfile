@@ -1,6 +1,6 @@
 FROM	abuisine/fcron:4.0.0
 LABEL	maintainer="Alexandre Buisine <alexandrejabuisine@gmail.com>"
-LABEL	version="2.1.0"
+LABEL	version="2.2.0"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
  && apt-get install -yqq \
