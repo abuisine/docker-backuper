@@ -1,4 +1,4 @@
-FROM	abuisine/fcron:4.0.0
+FROM	abuisine/fcron:4.0.1
 LABEL	maintainer="Alexandre Buisine <alexandrejabuisine@gmail.com>"
 LABEL	version="2.2.1"
 
