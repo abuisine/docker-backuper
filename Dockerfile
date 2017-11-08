@@ -1,28 +1,21 @@
-FROM	abuisine/fcron:4.0.1
+FROM	abuisine/fcron:4.1.0-debian9
 LABEL	maintainer="Alexandre Buisine <alexandrejabuisine@gmail.com>"
-LABEL	version="2.2.2"
+LABEL	version="3.0.0"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
- && apt-get install -yqq \
-	python-pip \
-	python-pexpect \
-	python-lockfile \
-	librsync1 \
+ && apt-get install --no-install-recommends -yqq \
+ 	python-boto \
 	mariadb-client \
+	duplicity \
+	gpg \
  && apt-get -yqq clean \
  && rm -rf /var/lib/apt/lists/*
 
-COPY resources/*.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/*.sh && pip install boto
-
-ENV DUPLICITY_VERSION="0.7.12" DUPLICITY_PPA_VERSION="0ubuntu0ppa1276"
-
-ADD http://ppa.launchpad.net/duplicity-team/ppa/ubuntu/pool/main/d/duplicity/duplicity_${DUPLICITY_VERSION}-${DUPLICITY_PPA_VERSION}~ubuntu16.04.1_amd64.deb .
-
-RUN dpkg -i duplicity_${DUPLICITY_VERSION}-${DUPLICITY_PPA_VERSION}~ubuntu16.04.1_amd64.deb
+COPY resources/backuper.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/backuper.sh
 
 VOLUME ["/data/redis", "/restore/redis", "/restore/mariadb"]
 
-ENV AWS_REGION="" AWS_BUCKET="" FOLDER="default"
+ENV AWS_REGION= AWS_BUCKET= FOLDER=default MAX_INCREMENTAL_ITERATION=25
 #ENV AWS_ACCESS_KEY_ID_FILE="" AWS_SECRET_ACCESS_KEY_FILE="" DUPLICITY_PASSPHRASE_FILE="" MYSQL_PASSWORD_FILE=""
 #ENV AWS_ACCESS_KEY_ID="" AWS_SECRET_ACCESS_KEY="" DUPLICITY_PASSPHRASE="" MYSQL_PASSWORD=""
