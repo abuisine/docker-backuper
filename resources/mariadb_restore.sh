@@ -24,4 +24,4 @@ file_env 'AWS_ACCESS_KEY_ID'
 file_env 'AWS_SECRET_ACCESS_KEY'
 
 S3_USE_SIGV4="True" \
-duplicity restore "$@" --force --s3-use-new-style --s3-european-buckets "s3://s3-$AWS_REGION.amazonaws.com/$AWS_BUCKET/mariadb/" /restore/mariadb
+duplicity restore "$@" --force --s3-use-new-style --s3-european-buckets "s3://s3-$AWS_REGION.amazonaws.com/$AWS_BUCKET/${FOLDER}/mariadb/" /restore/mariadb
