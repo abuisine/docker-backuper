@@ -1,6 +1,6 @@
 FROM	abuisine/fcron:4.1.1-debian9
 LABEL	maintainer="Alexandre Buisine <alexandrejabuisine@gmail.com>"
-LABEL	version="3.0.1"
+LABEL	version="3.0.2"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -qq update \
  && apt-get install --no-install-recommends -yqq \

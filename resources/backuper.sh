@@ -55,6 +55,7 @@ mariadb() {
 	elif [ "$1" == "backup" ]; then
 		file_env 'MYSQL_PASSWORD'
 
+		rm -f /tmp/mariadb/* || true
 		mkdir -p /tmp/mariadb
 		mysqldump --single-transaction --quick -h ${MYSQL_HOST} -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} > /tmp/mariadb/dump.sql \
 		 && S3_USE_SIGV4="True" duplicity \
@@ -65,7 +66,7 @@ mariadb() {
 			restore "${@:2}" --force \
 			--s3-use-new-style --s3-european-buckets "s3://s3-${AWS_REGION}.amazonaws.com/${AWS_BUCKET}/${FOLDER}/mariadb/" /restore/mariadb
 	else
-		echo "Usage: backuper redis <action>"
+		echo "Usage: backuper mariadb <action>"
 	fi
 }
 
